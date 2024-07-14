@@ -96,7 +96,7 @@ const switchWindow = (current, next) => {
   <window :id="'About'" :icon="'bi-info-circle-fill'" :windowType="'aboutWindow'" @switchWindow="switchWindow">
     <ul>
       <WindowText>Just a simple app with usual and tabata timers and stopwatch, written in <WindowLink link="https://vuejs.org/">Vue.js 3</WindowLink> <i class="devicon-vuejs-plain"></i>. That's all I can say actually.</WindowText>
-      <WindowText>Made by <WindowLink link="https://github.com/linvisn">linvisn</WindowLink> <i class="bi bi-github"></i> on July 15th 2024</WindowText>
+      <WindowText>Made by <WindowLink link="https://github.com/linvisn">linvisn</WindowLink> <i class="bi bi-github"></i> on July 14th 2024</WindowText>
     </ul>
   </window>
 
