@@ -25,7 +25,7 @@ defineEmits(['switchWindow'])
 
 <style scoped>
 .window {
-    display: flex !important;
+    display: none !important;
     justify-content: center !important;
     align-items: center !important;
 
@@ -43,10 +43,10 @@ defineEmits(['switchWindow'])
 
     background: rgba(30, 48, 48, 0.5);
 
-    z-index: -1;
+    z-index: 2;
 }
 .window-active {
-    z-index: 2;
+    display: flex !important;
 }
 
 .windowHeader {

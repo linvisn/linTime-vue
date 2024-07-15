@@ -27,7 +27,7 @@ ul {
     flex-direction: column;
 
     height: 50vh !important;
-    padding: 1vmax 1vmin !important;
+    padding: 2.5vh 1vmax !important;
 
     border-right: 0.1vmax solid rgba(255, 255, 255, 0.5);
 

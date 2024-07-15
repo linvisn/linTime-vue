@@ -3,11 +3,10 @@ defineProps({
     id: String,
     disabled: Boolean
 })
-defineEmits(['changeWindow'])
 </script>
 
 <template>
-    <li class="windowOption" :class="{ disabled: disabled }" @click="$emit('changeWindow', id)">
+    <li class="windowOption" :class="{ disabled: disabled }">
         <slot />
     </li>
 </template>

@@ -24,12 +24,12 @@ li {
     justify-content: center;
 
     margin-bottom: 1vh;
-    padding: 0.25vmax 0.875vmax;
+    padding: 0.25vmax 0;
 
-    font-size: calc(0.75rem + 0.875vh) !important;
+    font-size: calc(0.625rem + 1.25vh) !important;
     font-weight: 500;
 
-    border-radius: 1em;
+    border-radius: 0.25em;
 
     background-color: rgb(50, 73, 73);
 }
