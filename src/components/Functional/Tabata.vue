@@ -1,8 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import Button from "@/components/Button.vue"
-import tabataStartSound from '@/assets/tabataStartSound.mp3'
-import tabataEndSound from '@/assets/tabataEndSound.mp3'
+import tabataSound from '@/assets/tabataSound.mp3'
 
 const secondsForWork = ref(0)
 const secondsForRest = ref(0)
@@ -11,6 +10,7 @@ const rounds = ref(0)
 const currentRound = ref(0)
 
 const isStarted = ref(false)
+const isPaused = ref(false)
 const isWork = ref(false)
 
 let tabata = null
@@ -28,29 +28,17 @@ const startTabata = () => {
         isStarted.value = true
         time.value = 5
         tabata = setInterval(() => {
-            time.value -= 1
+            if(!isPaused.value) {
+                time.value -= 1
 
-            if(time.value == 3 && !isWork.value) {
-                var audio = new Audio(tabataStartSound)
-                audio.play()
-            }
-            if(time.value < 1) {
-                if(currentRound.value < rounds.value) {
-                    if(isWork.value) {
-                        time.value = secondsForRest.value
-                        var audio = new Audio(tabataEndSound)
-                        audio.play()
+                if(time.value < 1) {
+                    if(currentRound.value < rounds.value) {
+                        skipPhase()
                     }
-                    else {
-                        time.value = secondsForWork.value
-                        currentRound.value++
+                    else if (currentRound.value >= rounds.value) {
+                        resetTabata()
+                        playSound()
                     }
-                    isWork.value = !isWork.value
-                }
-                else if (currentRound.value >= rounds.value) {
-                    resetTabata()
-                    var audio = new Audio(tabataEndSound)
-                    audio.play()
                 }
             }
         }, 1000);
@@ -64,19 +52,36 @@ const resetTabata = () => {
     time.value = secondsForWork.value
     currentRound.value = 0
     isStarted.value = false
+    isPaused.value = false
     isWork.value = false
 
     clearInterval(tabata)
+}
+
+const skipPhase = () => {
+    if(isWork.value) {
+        time.value = secondsForRest.value
+    }
+    else {
+        time.value = secondsForWork.value
+        currentRound.value++
+    }
+    isWork.value = !isWork.value
+    playSound()
+}
+
+const playSound = () => {
+    var audio = new Audio(tabataSound)
+    audio.play()
 }
 </script>
 
 <template>
 <div class="tabata">
-    <p class="tabataHeader" v-if="isStarted">
+    <p class="tabataHeader" :class="{ tabataHeaderWork: isWork }" v-if="isStarted">
         {{ String(Math.floor((time % 3600) / 60)).padStart(2, '0') }}:{{ String(time % 60).padStart(2, '0') }}
-        <span v-if="isWork"> - Work -</span>
-        <span v-if="!isWork"> - Rest -</span>
-         round {{ currentRound }} of {{ rounds }}
+        <i v-if="isPaused" class="bi bi-pause-btn-fill"></i>
+        <div>Round {{ currentRound }} of {{ rounds }}</div>
     </p>
 
     <div class="tabataInputs row">
@@ -107,7 +112,9 @@ const resetTabata = () => {
 
 
     <Button v-if="!isStarted" @click="startTabata()"><i class="bi bi-caret-right-fill"></i> Start Tabata</Button>
-    <Button v-if="isStarted" @click="resetTabata()"><i class="bi bi-arrow-clockwise"></i> Reset Tabata</Button>
+    <Button v-if="isStarted" @click="isPaused = !isPaused"><i class="bi bi-pause-fill"></i> Pause Tabata</Button>
+    <Button v-if="isStarted && isPaused" @click="resetTabata()"><i class="bi bi-arrow-clockwise"></i> Reset Tabata</Button>
+    <Button v-if="isStarted" @click="skipPhase()"><i class="bi bi-skip-end-fill"></i> Skip Phase</Button>
 </div>
 </template>
 
@@ -123,10 +130,19 @@ const resetTabata = () => {
 
 .tabataHeader {
     margin: 0;
+    margin-bottom: 1vh;
+    padding: 0 calc(0.75rem + 0.75vh);
 
     font-size: calc(2rem + 1.5vh);
     font-weight: 900;
     text-align: center;
+
+    border-radius: 0.25em;
+    
+    background: green;
+}
+.tabataHeaderWork {
+    background: red;
 }
 
 .tabataInputs {

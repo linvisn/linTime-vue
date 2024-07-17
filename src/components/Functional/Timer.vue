@@ -16,6 +16,8 @@ let timer = null
 
 watch([seconds, minutes, hours], ([newSeconds, newMinutes, newHours]) => {
     seconds.value = Math.floor(newSeconds)
+    minutes.value = Math.floor(newMinutes)
+    hours.value = Math.floor(newHours)
     time.value = (newSeconds + newMinutes * 60 + newHours * 3600)
 })
 
@@ -54,7 +56,7 @@ const resetTimer = () => {
 <div class="timer">
     <p class="timerHeader"> 
         <span v-if="Math.floor(time / 3600) > 0">{{ String(Math.floor(time / 3600)).padStart(2, '0') }}:</span>{{ String(Math.floor((time % 3600) / 60)).padStart(2, '0') }}:{{ String(time % 60).padStart(2, '0') }}
-         <i v-if="isPaused" class="bi bi-pause-btn-fill"></i>
+        <i v-if="isPaused" class="bi bi-pause-btn-fill"></i>
     </p>
 
 
