@@ -9,7 +9,7 @@ defineProps({
 
 <template>
 <div class="lap row">
-    <div class="lap-left col">
+    <div class="lap-left col-12 col-sm">
         <div>Lap {{ id }}</div>
         <div class="lap-left-time">Time elapsed: {{ timeElapsed }}</div>
     </div>
