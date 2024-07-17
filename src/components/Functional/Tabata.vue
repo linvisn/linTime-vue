@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import Button from "@/components/Button.vue"
-import tabataSound from '@/assets/tabataSound.mp3'
+import tabataStartSound from '@/assets/tabataStartSound.mp3'
+import tabataEndSound from '@/assets/tabataEndSound.mp3'
 
 const secondsForWork = ref(0)
 const secondsForRest = ref(0)
@@ -15,6 +16,13 @@ const isWork = ref(false)
 let tabata = null
 
 
+watch([secondsForWork, secondsForRest, rounds], ([newSecondsForWork, newSecondsForRest, newRounds]) => {
+    secondsForWork.value = Math.floor(newSecondsForWork)
+    secondsForRest.value = Math.floor(newSecondsForRest)
+    rounds.value = Math.floor(newRounds)
+})
+
+
 const startTabata = () => {
     if(secondsForWork.value >= 5 && secondsForRest.value >= 5 && secondsForWork.value <= 600 && secondsForRest.value <= 600 && rounds.value > 0) {
         isStarted.value = true
@@ -22,14 +30,16 @@ const startTabata = () => {
         tabata = setInterval(() => {
             time.value -= 1
 
-            if(time.value == 3) {
-                var audio = new Audio(tabataSound)
+            if(time.value == 3 && !isWork.value) {
+                var audio = new Audio(tabataStartSound)
                 audio.play()
             }
             if(time.value < 1) {
                 if(currentRound.value < rounds.value) {
                     if(isWork.value) {
                         time.value = secondsForRest.value
+                        var audio = new Audio(tabataEndSound)
+                        audio.play()
                     }
                     else {
                         time.value = secondsForWork.value
@@ -39,6 +49,8 @@ const startTabata = () => {
                 }
                 else if (currentRound.value >= rounds.value) {
                     resetTabata()
+                    var audio = new Audio(tabataEndSound)
+                    audio.play()
                 }
             }
         }, 1000);

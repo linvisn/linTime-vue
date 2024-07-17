@@ -15,6 +15,7 @@ let timer = null
 
 
 watch([seconds, minutes, hours], ([newSeconds, newMinutes, newHours]) => {
+    seconds.value = Math.floor(newSeconds)
     time.value = (newSeconds + newMinutes * 60 + newHours * 3600)
 })
 
@@ -22,6 +23,7 @@ watch([seconds, minutes, hours], ([newSeconds, newMinutes, newHours]) => {
 const startTimer = () => {
     if(time.value > 0 && time.value <= 120 * 3600) {
         isStarted.value = true
+        
         timer = setInterval(() => {
             if(!isPaused.value) {
                 time.value -= 1
