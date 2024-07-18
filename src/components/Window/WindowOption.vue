@@ -22,6 +22,8 @@ defineProps({
     border-radius: 0.5em;
 
     background-color: rgb(73, 0, 133);
+
+    cursor: pointer;
 }
 .windowOption:is(.disabled) {
     background-color: rgb(36, 36, 36);

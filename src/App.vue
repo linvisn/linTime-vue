@@ -90,6 +90,7 @@ const switchWindow = (current, next) => {
     <ul>
       <WindowOption @click="switchWindow('Settings', 'Customization')"><i class="bi bi-palette-fill"></i> Customization</WindowOption>
       <WindowOption @click="switchWindow('Settings', 'Tools')"><i class="bi bi-tools"></i> Used Tools</WindowOption>
+      <a href="https://github.com/linvisn/linTime/" target="_blank"><WindowOption><i class="bi bi-github"></i> GitHub Repo</WindowOption></a>
     </ul>
   </window>
 
