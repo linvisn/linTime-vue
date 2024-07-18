@@ -32,13 +32,7 @@ const startTabata = () => {
                 time.value -= 1
 
                 if(time.value < 1) {
-                    if(currentRound.value < rounds.value) {
-                        skipPhase()
-                    }
-                    else if (currentRound.value >= rounds.value) {
-                        resetTabata()
-                        playSound()
-                    }
+                    skipPhase()
                 }
             }
         }, 1000);
@@ -59,14 +53,19 @@ const resetTabata = () => {
 }
 
 const skipPhase = () => {
-    if(isWork.value) {
-        time.value = secondsForRest.value
+    if(currentRound.value < rounds.value) {
+        if(isWork.value) {
+            time.value = secondsForRest.value
+        }
+        else {
+            time.value = secondsForWork.value
+            currentRound.value++
+        }
+        isWork.value = !isWork.value
     }
-    else {
-        time.value = secondsForWork.value
-        currentRound.value++
+    else if (currentRound.value >= rounds.value) {
+        resetTabata()
     }
-    isWork.value = !isWork.value
     playSound()
 }
 
