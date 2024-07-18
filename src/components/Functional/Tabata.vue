@@ -80,12 +80,13 @@ const playSound = () => {
 <div class="tabata">
     <p class="tabataHeader" :class="{ tabataHeaderWork: isWork }" v-if="isStarted">
         {{ String(Math.floor((time % 3600) / 60)).padStart(2, '0') }}:{{ String(time % 60).padStart(2, '0') }}
+        <span class="label" v-if="isWork"> work </span><span class="label" v-if="!isWork"> rest </span>
         <i v-if="isPaused" class="bi bi-pause-btn-fill"></i>
-        <div>Round {{ currentRound }} of {{ rounds }}</div>
+        <div class="round">Round {{ currentRound }} of {{ rounds }}</div>
     </p>
 
     <div class="tabataInputs row">
-        <span class="tabataInputItem col-lg-3 col-4">
+        <span class="tabataInputItem col-lg-4 col-5">
             <div class="tabataInputLabel">
                 seconds for work
                 <span class="resetValue d-block d-sm-inline" v-if="!isStarted" @click="secondsForWork = 0"><i class="bi bi-arrow-clockwise"></i></span>
@@ -125,12 +126,12 @@ const playSound = () => {
     align-items: center;
     justify-content: center;
     
-    padding: 1vmax 0;
+    padding: 1vmax 2vmax;
 }
 
 .tabataHeader {
     margin: 0;
-    margin-bottom: 1vh;
+    margin-bottom: 2vh;
     padding: 0 calc(0.75rem + 0.75vh);
 
     font-size: calc(2rem + 1.5vh);
@@ -195,5 +196,17 @@ const playSound = () => {
 }
 .resetValue:hover {
     background-color: rgb(37, 163, 121);
+}
+
+.label {
+    font-size: calc(1.5rem + 1vh);
+    font-weight: 700;
+
+    opacity: 0.75;
+}
+
+.round {
+    font-size: calc(1.75rem + 1.25vh);
+    font-weight: 500;
 }
 </style>
