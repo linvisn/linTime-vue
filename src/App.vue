@@ -24,7 +24,7 @@ const enabledFont = computed(() => ({
 
 onMounted(() => {
   if(Cookies.get('defaultPanel') == undefined) {
-    Cookies.set('defaultPanel', mainPanels.value[0].title)
+    Cookies.set('defaultPanel', mainPanels.value[0].title, { expires: 365 })
   }
   defaultPanel.value = Cookies.get('defaultPanel')
 
@@ -34,17 +34,17 @@ onMounted(() => {
   }
 
   if(Cookies.get('defaultFont') == undefined) {
-    Cookies.set('defaultFont', fonts.value[0].family)
+    Cookies.set('defaultFont', fonts.value[0].family, { expires: 365 })
   }
   defaultFont.value = Cookies.get('defaultFont')
 })
 
 
 watch(defaultPanel, () => {
-  Cookies.set('defaultPanel', defaultPanel.value)
+  Cookies.set('defaultPanel', defaultPanel.value, { expires: 365 })
 })
 watch(defaultFont, () => {
-  Cookies.set('defaultFont', defaultFont.value)
+  Cookies.set('defaultFont', defaultFont.value, { expires: 365 })
 })
 
 
