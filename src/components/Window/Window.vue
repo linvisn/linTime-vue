@@ -33,8 +33,8 @@ defineEmits(['switchWindow'])
     top: 0;
     left: 0;
 
-    width: 100% !important;
-    height: 100% !important;
+    width: 100vw !important;
+    height: 100vh !important;
     padding: 0 !important;
     margin: 0 !important;
 
