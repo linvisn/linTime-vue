@@ -15,6 +15,26 @@ ul {
     list-style: none !important;
 }
 
+select {
+    margin-top: 0.5vh;
+
+    border: none !important;
+    border-radius: 0.375em !important;
+
+    font-size: calc(0.75rem + 0.75vh) !important;
+    font-weight: 500 !important;
+
+    background-color: rgba(213, 214, 121, 0.875) !important;
+
+    box-shadow: none !important;
+}
+
+option {
+    color: black !important;
+
+    background-color: rgb(180, 182, 102) !important;
+}
+
 .panel {
     position: relative;
 

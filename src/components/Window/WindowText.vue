@@ -7,6 +7,6 @@
     margin-top: 1rem;
 
     font-size: calc(1rem + 1vh);
-    font-weight: 500;
+    font-weight: 600;
 }
 </style>

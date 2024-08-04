@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import SidePanelOption from "@/components/SidePanelOption.vue"
 import MainPanel from "@/components/MainPanel.vue"
 import Radio from "@/components/Radio.vue"
+import Switch from "@/components/Switch.vue"
 
 import Window from "@/components/Window/Window.vue"
 import WindowOption from "@/components/Window/WindowOption.vue"
@@ -14,11 +15,16 @@ import WindowLink from "@/components/Window/WindowLink.vue"
 
 const defaultPanel = ref('')
 const defaultFont = ref('')
+const settingsOptionsExpanded = ref('')
+
 const enabledFont = computed(() => ({
   'font-raleway': defaultFont.value === 'Raleway',
   'font-open-sans': defaultFont.value === 'Open Sans',
   'font-ubuntu': defaultFont.value === 'Ubuntu',
-  'font-noto-serif': defaultFont.value === 'Noto Serif'
+  'font-noto-serif': defaultFont.value === 'Noto Serif',
+  'font-jetbrains-mono': defaultFont.value === 'JetBrains Mono',
+  'font-source-code-pro': defaultFont.value === 'Source Code Pro',
+  'font-geologica': defaultFont.value === 'Geologica'
 }))
 
 
@@ -37,6 +43,11 @@ onMounted(() => {
     Cookies.set('defaultFont', fonts.value[0].family, { expires: 365 })
   }
   defaultFont.value = Cookies.get('defaultFont')
+
+  if(Cookies.get('settingsOptionsExpanded') == undefined) {
+    Cookies.set('settingsOptionsExpanded', true, { expires: 365 })
+  }
+  settingsOptionsExpanded.value = Cookies.get('settingsOptionsExpanded') === 'true'
 })
 
 
@@ -45,6 +56,9 @@ watch(defaultPanel, () => {
 })
 watch(defaultFont, () => {
   Cookies.set('defaultFont', defaultFont.value, { expires: 365 })
+})
+watch(settingsOptionsExpanded, () => {
+  Cookies.set('settingsOptionsExpanded', settingsOptionsExpanded.value, { expires: 365 })
 })
 
 
@@ -58,10 +72,13 @@ const windows = ref([
   { title: 'About', icon: "bi-info-circle-fill", window: "About"}
 ])
 const fonts = ref([
-  { family: 'Raleway', class: 'font-raleway'},
-  { family: 'Open Sans', class: 'font-open-sans'},
-  { family: 'Ubuntu', class: 'font-ubuntu'},
-  { family: 'Noto Serif', class: 'font-noto-serif'}
+  { family: 'Raleway', class: 'font-raleway' },
+  { family: 'Open Sans', class: 'font-open-sans' },
+  { family: 'Ubuntu', class: 'font-ubuntu' },
+  { family: 'Noto Serif', class: 'font-noto-serif' },
+  { family: 'JetBrains Mono', class: 'font-jetbrains-mono' },
+  { family: 'Source Code Pro', class: 'font-source-code-pro'},
+  { family: 'Geologica', class: 'font-geologica'}
 ])
 
 
@@ -103,11 +120,23 @@ const switchWindow = (current, next) => {
 
   <window :id="'Customization'" :prevId="'Settings'" :icon="'bi-palette-fill'" :windowType="'customizationWindow'" @switchWindow="switchWindow">
     <ul>
+      <Switch :text="'Set Settings options expanded'" v-model="settingsOptionsExpanded" />
+
       <WindowText>Choose default panel:</WindowText>
-      <Radio v-for="(mainPanel, index) in mainPanels" :key="index" :name="'defaultPanel'" :id="'defaultPanel' + index" v-model="defaultPanel" :value="mainPanel.title" />
+      <div v-if="settingsOptionsExpanded">
+        <Radio v-for="(mainPanel, index) in mainPanels" :key="index" :name="'defaultPanel'" :id="'defaultPanel' + index" v-model="defaultPanel" :value="mainPanel.title" />
+      </div>
+      <select v-else class="form-select" v-model="defaultPanel">
+        <option v-for="(mainPanel, index) in mainPanels" :key="index" :name="'defaultPanel'" :id="'defaultPanel' + index" :value="mainPanel.title">{{ mainPanel.title }}</option>
+      </select>
 
       <WindowText>Choose default font:</WindowText>
-      <Radio v-for="(font, index) in fonts" :key="index" :name="'defaultFont'" :class='font.class' :id="'defaultFont' + index" v-model="defaultFont" :value="font.family" />
+      <div v-if="settingsOptionsExpanded">
+        <Radio v-for="(font, index) in fonts" :key="index" :name="'defaultFont'" :class='font.class' :id="'defaultFont' + index" v-model="defaultFont" :value="font.family" />
+      </div>
+      <select v-else class="form-select" v-model="defaultFont">
+        <option v-for="(font, index) in fonts" :key="index" :name="'defaultFont'" :class='font.class' :id="'defaultFont' + index" :value="font.family">{{ font.family }}</option>
+      </select>
     </ul>
   </window>
 
@@ -157,5 +186,14 @@ const switchWindow = (current, next) => {
 }
 .font-noto-serif {
   font-family: 'Noto Serif';
+}
+.font-jetbrains-mono {
+  font-family: 'JetBrains Mono';
+}
+.font-source-code-pro {
+  font-family: 'Source Code Pro';
+}
+.font-geologica {
+  font-family: 'Geologica';
 }
 </style>
