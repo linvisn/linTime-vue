@@ -5,7 +5,7 @@ import Lap from '@/components/Functional/Lap.vue'
 import stopwatchSound from '@/assets/stopwatchSound.mp3'
 
 const ms = ref(0)
-const isStarted = ref(false)
+const isStarted = defineModel('isStarted')
 const isPaused = ref(false)
 
 let startTime = 0

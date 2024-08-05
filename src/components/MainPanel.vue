@@ -8,14 +8,15 @@ defineProps({
     title: String,
     active: Boolean
 })
+const isStarted = defineModel('isStarted')
 </script>
 
 <template>
     <div class="main-panel" :class="{ 'main-panel-active': active }" :id="id">
         <div class="MPHeader sticky-top">{{ title }}</div>
-        <Timer v-if="title === 'Timer'" />
-        <Stopwatch v-if="title === 'Stopwatch'" />
-        <Tabata v-if="title === 'Tabata'" />
+        <Timer v-if="title === 'Timer'" v-model:isStarted="isStarted" />
+        <Stopwatch v-if="title === 'Stopwatch'" v-model:isStarted="isStarted" />
+        <Tabata v-if="title === 'Tabata'" v-model:isStarted="isStarted" />
     </div>
 </template>
 

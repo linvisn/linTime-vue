@@ -8,7 +8,7 @@ const minutes = ref(0)
 const hours = ref(0)
 const time = ref(0)
 
-const isStarted = ref(false)
+const isStarted = defineModel('isStarted')
 const isPaused = ref(false)
 
 let timer = null

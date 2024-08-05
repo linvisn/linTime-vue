@@ -9,7 +9,7 @@ const time = ref(0)
 const rounds = ref(0)
 const currentRound = ref(0)
 
-const isStarted = ref(false)
+const isStarted = defineModel('isStarted')
 const isPaused = ref(false)
 const isWork = ref(false)
 

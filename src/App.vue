@@ -28,6 +28,15 @@ const enabledFont = computed(() => ({
 }))
 
 
+window.addEventListener('beforeunload', (event) => {
+  mainPanels.value.forEach((mainPanel) => {
+    if(mainPanel.isStarted) {
+      event.preventDefault()
+    }
+  })
+})
+
+
 onMounted(() => {
   if(Cookies.get('defaultPanel') == undefined) {
     Cookies.set('defaultPanel', mainPanels.value[0].title, { expires: 365 })
@@ -63,9 +72,9 @@ watch(settingsOptionsExpanded, () => {
 
 
 const mainPanels = ref([
-  { title: 'Timer', icon: "bi-hourglass-split", MP: "MPTimer"},
-  { title: 'Stopwatch', icon: "bi-stopwatch", MP: "MPStopwatch"},
-  { title: 'Tabata', icon: "bi-repeat", MP: "MPTabata" }
+  { title: 'Timer', icon: "bi-hourglass-split", MP: "MPTimer", isStarted: false},
+  { title: 'Stopwatch', icon: "bi-stopwatch", MP: "MPStopwatch", isStarted: false},
+  { title: 'Tabata', icon: "bi-repeat", MP: "MPTabata", isStarted: false}
 ])
 const windows = ref([
   { title: 'Settings', icon: "bi-gear-fill", window: "Settings"},
@@ -168,7 +177,7 @@ const switchWindow = (current, next) => {
     </div>
 
     <div class="panel col">
-      <MainPanel v-for="(mainPanel, index) in mainPanels" :key="index" :id="mainPanel.MP" :title="mainPanel.title" :active="mainPanel.active" />
+      <MainPanel v-for="(mainPanel, index) in mainPanels" :key="index" :id="mainPanel.MP" :title="mainPanel.title" :active="mainPanel.active" v-model:isStarted="mainPanel.isStarted" />
     </div>
   </div>
 </div>
