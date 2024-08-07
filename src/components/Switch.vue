@@ -37,7 +37,7 @@ const model = defineModel()
 }
 
 .switchLabel {
-    margin-left: calc(1rem + 1vh);
+    margin-left: calc(0.75rem + 0.75vh);
 
     font-size: calc(0.875rem + 0.875vh);
     font-weight: 500;

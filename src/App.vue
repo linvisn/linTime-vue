@@ -29,45 +29,11 @@ const enabledFont = computed(() => ({
 
 
 window.addEventListener('beforeunload', (event) => {
-  mainPanels.value.forEach((mainPanel) => {
+  mainPanels.value.forEach(mainPanel => {
     if(mainPanel.isStarted) {
       event.preventDefault()
     }
   })
-})
-
-
-onMounted(() => {
-  if(Cookies.get('defaultPanel') == undefined) {
-    Cookies.set('defaultPanel', mainPanels.value[0].title, { expires: 365 })
-  }
-  defaultPanel.value = Cookies.get('defaultPanel')
-
-  let MP = mainPanels.value.find(item => item.title === defaultPanel.value)
-  if (MP) {
-    MP.active = true
-  }
-
-  if(Cookies.get('defaultFont') == undefined) {
-    Cookies.set('defaultFont', fonts.value[0].family, { expires: 365 })
-  }
-  defaultFont.value = Cookies.get('defaultFont')
-
-  if(Cookies.get('settingsOptionsExpanded') == undefined) {
-    Cookies.set('settingsOptionsExpanded', true, { expires: 365 })
-  }
-  settingsOptionsExpanded.value = Cookies.get('settingsOptionsExpanded') === 'true'
-})
-
-
-watch(defaultPanel, () => {
-  Cookies.set('defaultPanel', defaultPanel.value, { expires: 365 })
-})
-watch(defaultFont, () => {
-  Cookies.set('defaultFont', defaultFont.value, { expires: 365 })
-})
-watch(settingsOptionsExpanded, () => {
-  Cookies.set('settingsOptionsExpanded', settingsOptionsExpanded.value, { expires: 365 })
 })
 
 
@@ -89,6 +55,38 @@ const fonts = ref([
   { family: 'Source Code Pro', class: 'font-source-code-pro'},
   { family: 'Geologica', class: 'font-geologica'}
 ])
+
+const cookies = ref([
+  { variable: defaultPanel, title: 'defaultPanel', defaultValue: mainPanels.value[0].title },
+  { variable: defaultFont, title: 'defaultFont', defaultValue: fonts.value[0].family },
+  { variable: settingsOptionsExpanded, title: 'settingsOptionsExpanded', defaultValue: true }
+])
+
+
+onMounted(() => {
+  cookies.value.forEach(cookie => {
+    if(Cookies.get(cookie.title) == undefined) {
+      Cookies.set(cookie.title, cookie.defaultValue, { expires: 365 })
+    }
+
+    if(cookie.title === 'settingsOptionsExpanded') {
+      cookie.variable = Cookies.get(cookie.title) === 'true'
+    }
+    else {
+      cookie.variable = Cookies.get(cookie.title)
+    }
+  })
+
+  let MP = mainPanels.value.find(item => item.title === defaultPanel.value)
+  MP.active = true
+})
+
+
+cookies.value.forEach(cookie => {
+  watch(() => cookie.variable, (newValue) => {
+    Cookies.set(cookie.title, newValue, { expires: 365 })
+  })
+})
 
 
 const switchMPState = (event, id) => {
