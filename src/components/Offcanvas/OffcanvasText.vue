@@ -1,9 +1,9 @@
 <template>
-    <div class="windowText"><slot /></div>
+    <div class="offcanvasText"><slot /></div>
 </template>
 
 <style scoped>
-.windowText {
+.offcanvasText {
     margin-top: 1rem;
 
     font-size: calc(1rem + 1vh);

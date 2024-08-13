@@ -24,11 +24,12 @@ const model = defineModel()
 }
 
 .switchInput {
-    width: 2.25em;
-    height: 1.25em;
+    width: calc(2.375rem + 2.375vh);
+    height: calc(1.375rem + 1.375vh);
     margin-top: 0;
 
     border: calc(0.1rem + 0.1vh) solid rgb(255, 255, 255);
+    border-radius: 2em;
 
     box-shadow: none;
 }

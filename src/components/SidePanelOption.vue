@@ -3,14 +3,13 @@ defineProps({
     title: String,
     icon: String,
     active: Boolean,
-    MP: String,
-    window: String
+    MP: String
 })
-defineEmits(['switchMPState', 'switchWindow'])
+defineEmits(['switchMPState'])
 </script>
 
 <template>
-    <li class="sidePanelOption" :class="{ active: active }" @click="$emit('switchMPState', $event, MP), $emit('switchWindow', window)">
+    <li class="sidePanelOption" :class="{ active: active }" @click="$emit('switchMPState', $event, MP)">
         <div>
             <i class="bi" :class="icon"></i><span class="title d-none d-lg-inline">{{ title }}</span>
         </div>

@@ -5,16 +5,16 @@ defineProps({
 </script>
 
 <template>
-    <a class="windowLink" target="_blank" :href="link"><slot /></a>
+    <a class="offcanvasLink" target="_blank" :href="link"><slot /></a>
 </template>
 
 <style scoped>
-.windowLink {
+.offcanvasLink {
     font-weight: 700;
     color: rgb(138, 172, 216);
     text-decoration: underline !important;
 }
-.windowLink:hover {
+.offcanvasLink:hover {
     color: rgb(169, 192, 223);
 }
 </style>

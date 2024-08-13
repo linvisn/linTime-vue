@@ -6,13 +6,13 @@ defineProps({
 </script>
 
 <template>
-    <li class="windowOption" :class="{ disabled: disabled }">
+    <li class="offcanvasOption" :class="{ disabled: disabled }">
         <slot />
     </li>
 </template>
 
 <style scoped>
-.windowOption {
+.offcanvasOption {
     margin-top: 1.5vh;
     padding: calc(0.25rem + 0.25vh) calc(0.75rem + 0.75vh);
 
@@ -25,12 +25,12 @@ defineProps({
 
     cursor: pointer;
 }
-.windowOption:is(.disabled) {
+.offcanvasOption:is(.disabled) {
     background-color: rgb(36, 36, 36);
 
     opacity: 0.5;
 }
-.windowOption:not(.disabled):hover {
+.offcanvasOption:not(.disabled):hover {
     background-color: rgb(100, 0, 182);
 }
 </style>

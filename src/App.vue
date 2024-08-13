@@ -7,10 +7,10 @@ import MainPanel from "@/components/MainPanel.vue"
 import Radio from "@/components/Radio.vue"
 import Switch from "@/components/Switch.vue"
 
-import Window from "@/components/Window/Window.vue"
-import WindowOption from "@/components/Window/WindowOption.vue"
-import WindowText from "@/components/Window/WindowText.vue"
-import WindowLink from "@/components/Window/WindowLink.vue"
+import Offcanvas from './components/Offcanvas/Offcanvas.vue'
+import OffcanvasOption from "@/components/Offcanvas/OffcanvasOption.vue"
+import OffcanvasText from "@/components/Offcanvas/OffcanvasText.vue"
+import OffcanvasLink from "@/components/Offcanvas/OffcanvasLink.vue"
 
 
 const defaultPanel = ref('')
@@ -42,9 +42,9 @@ const mainPanels = ref([
   { title: 'Stopwatch', icon: "bi-stopwatch", MP: "MPStopwatch", isStarted: false},
   { title: 'Tabata', icon: "bi-repeat", MP: "MPTabata", isStarted: false}
 ])
-const windows = ref([
-  { title: 'Settings', icon: "bi-gear-fill", window: "Settings"},
-  { title: 'About', icon: "bi-info-circle-fill", window: "About"}
+const offcanvas = ref([
+  { title: 'Settings', icon: "bi-gear-fill", href: 'settingsOffcanvas'},
+  { title: 'About', icon: "bi-info-circle-fill", href: 'aboutOffcanvas'}
 ])
 const fonts = ref([
   { family: 'Raleway', class: 'font-raleway' },
@@ -96,67 +96,52 @@ const switchMPState = (event, id) => {
   document.querySelector(".main-panel-active").classList.remove('main-panel-active')
   document.getElementById(id).classList.add('main-panel-active')
 }
-
-const switchWindow = (current, next) => {
-  let currentEl = document.getElementById(current)
-  currentEl.classList.toggle('window-active')
-
-  if(next) {
-    let nextEl = document.getElementById(next)
-    nextEl.classList.toggle('window-active')
-  }
-}
 </script>
 
 <template>
 <div :class="enabledFont">
-  <window :id="'Settings'" :icon="'bi-gear-fill'" :windowType="'settingsWindow'" @switchWindow="switchWindow">
+  <Offcanvas :id="'settingsOffcanvas'" :title="'Settings'" :icon="'bi-gear-fill'">
     <ul>
-      <WindowOption @click="switchWindow('Settings', 'Customization')"><i class="bi bi-palette-fill"></i> Customization</WindowOption>
-      <WindowOption @click="switchWindow('Settings', 'Tools')"><i class="bi bi-tools"></i> Used Tools</WindowOption>
-      <a href="https://github.com/linvisn/linTime/" target="_blank"><WindowOption><i class="bi bi-github"></i> GitHub Repo</WindowOption></a>
+      <OffcanvasOption data-bs-toggle="offcanvas" href="#customizationOffcanvas" aria-controls="customizationOffcanvas"><i class="bi bi-palette-fill"></i> Personalization</OffcanvasOption>
+      <OffcanvasOption data-bs-toggle="offcanvas" href="#toolsOffcanvas" aria-controls="toolsOffcanvas"><i class="bi bi-tools"></i> Used Tools</OffcanvasOption>
+      <a href="https://github.com/linvisn/linTime/" target="_blank"><OffcanvasOption><i class="bi bi-github"></i> GitHub Repo</OffcanvasOption></a>
     </ul>
-  </window>
+  </Offcanvas>
 
-  <window :id="'About'" :icon="'bi-info-circle-fill'" :windowType="'aboutWindow'" @switchWindow="switchWindow">
-    <ul>
-      <WindowText>A simple app with usual Timer, Tabata Timer and Stopwatch, written in <WindowLink link="https://vuejs.org/">Vue.js 3</WindowLink> <i class="devicon-vuejs-plain"></i></WindowText>
-      <WindowText>Made by <WindowLink link="https://github.com/linvisn">linvisn</WindowLink> <i class="bi bi-github"></i> on July 14th 2024</WindowText>
-    </ul>
-  </window>
+  <Offcanvas :id="'aboutOffcanvas'" :title="'About'" :icon="'bi-info-circle-fill'">
+    <OffcanvasText>A simple app with usual Timer, Tabata Timer and Stopwatch, written in <OffcanvasLink link="https://vuejs.org/">Vue.js 3</OffcanvasLink> <i class="devicon-vuejs-plain"></i></OffcanvasText>
+    <OffcanvasText>Made by <OffcanvasLink link="https://github.com/linvisn">linvisn</OffcanvasLink> <i class="bi bi-github"></i> on July 14th 2024</OffcanvasText>
+  </Offcanvas>
 
-  <window :id="'Customization'" :prevId="'Settings'" :icon="'bi-palette-fill'" :windowType="'customizationWindow'" @switchWindow="switchWindow">
-    <ul>
-      <Switch :text="'Set Settings options expanded'" v-model="settingsOptionsExpanded" />
+  <Offcanvas :id="'customizationOffcanvas'" :title="'Customization'" :icon="'bi-palette-fill'" :prevOffcanvas="'settingsOffcanvas'">
+    <Switch :text="'Set Settings options expanded'" v-model="settingsOptionsExpanded" />
+    <OffcanvasText>Choose default panel:</OffcanvasText>
+    <div v-if="settingsOptionsExpanded">
+      <Radio v-for="(mainPanel, index) in mainPanels" :key="index" :name="'defaultPanel'" :id="'defaultPanel' + index" v-model="defaultPanel" :value="mainPanel.title" />
+    </div>
+    <select v-else class="form-select" v-model="defaultPanel">
+      <option v-for="(mainPanel, index) in mainPanels" :key="index" :name="'defaultPanel'" :id="'defaultPanel' + index" :value="mainPanel.title">{{ mainPanel.title }}</option>
+    </select>
 
-      <WindowText>Choose default panel:</WindowText>
-      <div v-if="settingsOptionsExpanded">
-        <Radio v-for="(mainPanel, index) in mainPanels" :key="index" :name="'defaultPanel'" :id="'defaultPanel' + index" v-model="defaultPanel" :value="mainPanel.title" />
-      </div>
-      <select v-else class="form-select" v-model="defaultPanel">
-        <option v-for="(mainPanel, index) in mainPanels" :key="index" :name="'defaultPanel'" :id="'defaultPanel' + index" :value="mainPanel.title">{{ mainPanel.title }}</option>
-      </select>
-
-      <WindowText>Choose default font:</WindowText>
-      <div v-if="settingsOptionsExpanded">
-        <Radio v-for="(font, index) in fonts" :key="index" :name="'defaultFont'" :class='font.class' :id="'defaultFont' + index" v-model="defaultFont" :value="font.family" />
-      </div>
-      <select v-else class="form-select" v-model="defaultFont">
-        <option v-for="(font, index) in fonts" :key="index" :name="'defaultFont'" :class='font.class' :id="'defaultFont' + index" :value="font.family">{{ font.family }}</option>
-      </select>
-    </ul>
-  </window>
-
-  <window :id="'Tools'" :prevId="'Settings'" :icon="'bi-tools'" :windowType="'toolsWindow'" @switchWindow="switchWindow">
+    <OffcanvasText>Choose default font:</OffcanvasText>
+    <div v-if="settingsOptionsExpanded">
+      <Radio v-for="(font, index) in fonts" :key="index" :name="'defaultFont'" :class='font.class' :id="'defaultFont' + index" v-model="defaultFont" :value="font.family" />
+    </div>
+    <select v-else class="form-select" v-model="defaultFont">
+      <option v-for="(font, index) in fonts" :key="index" :name="'defaultFont'" :class='font.class' :id="'defaultFont' + index" :value="font.family">{{ font.family }}</option>
+    </select>
+  </Offcanvas>
+  
+  <Offcanvas :id="'toolsOffcanvas'" :title="'Tools'" :icon="'bi-tools'" :prevOffcanvas="'settingsOffcanvas'">
     <ol>
-      <li><WindowText><WindowLink link="https://vuejs.org/">Vue.js 3</WindowLink> <i class="devicon-vuejs-plain"></i></WindowText></li>
-      <li><WindowText><WindowLink link="https://getbootstrap.com/">Bootstrap 5</WindowLink> <i class="devicon-bootstrap-plain"></i></WindowText></li>
-      <li><WindowText><WindowLink link="https://icons.getbootstrap.com/">Bootstrap Icons</WindowLink> <i class="devicon-bootstrap-plain"></i></WindowText></li>
-      <li><WindowText><WindowLink link="https://devicon.dev/">Devicon</WindowLink> <i class="devicon-devicon-plain"></i></WindowText></li>
-      <li><WindowText><WindowLink link="https://fonts.google.com/">Google Fonts</WindowLink> <i class="devicon-google-plain"></i></WindowText></li>
-      <li><WindowText><WindowLink link="https://www.npmjs.com/package/js-cookie">js-cookie</WindowLink> <i class="bi bi-cookie"></i></WindowText></li>
+      <li><OffcanvasText><OffcanvasLink link="https://vuejs.org/">Vue.js 3</OffcanvasLink> <i class="devicon-vuejs-plain"></i></OffcanvasText></li>
+      <li><OffcanvasText><OffcanvasLink link="https://getbootstrap.com/">Bootstrap 5</OffcanvasLink> <i class="devicon-bootstrap-plain"></i></OffcanvasText></li>
+      <li><OffcanvasText><OffcanvasLink link="https://icons.getbootstrap.com/">Bootstrap Icons</OffcanvasLink> <i class="devicon-bootstrap-plain"></i></OffcanvasText></li>
+      <li><OffcanvasText><OffcanvasLink link="https://devicon.dev/">Devicon</OffcanvasLink> <i class="devicon-devicon-plain"></i></OffcanvasText></li>
+      <li><OffcanvasText><OffcanvasLink link="https://fonts.google.com/">Google Fonts</OffcanvasLink> <i class="devicon-google-plain"></i></OffcanvasText></li>
+      <li><OffcanvasText><OffcanvasLink link="https://www.npmjs.com/package/js-cookie">js-cookie</OffcanvasLink> <i class="bi bi-cookie"></i></OffcanvasText></li>
     </ol>
-  </window>
+  </Offcanvas>
 
   
   <div class="row">
@@ -169,7 +154,7 @@ const switchWindow = (current, next) => {
 
       <div class="side-panel justify-content-end">
         <ul class="side-panel-menu">
-          <SidePanelOption v-for="(option, index) in windows" :key="index" :title="option.title" :icon="option.icon" :window="option.window" @switchWindow="switchWindow" />
+          <SidePanelOption v-for="(option, index) in offcanvas" :key="index" :title="option.title" :icon="option.icon" data-bs-toggle="offcanvas" :href="'#' + option.href" :aria-controls="option.href" />
         </ul>
       </div>
     </div>
