@@ -53,18 +53,18 @@ defineProps({
     border-right: 0.1em solid rgba(255, 255, 255, 0.5);
 }
 #settingsOffcanvas {
-    background: rgb(31, 31, 78) !important;
+    background: linear-gradient(163deg, rgb(52, 52, 161), rgb(196, 73, 221)) !important;
 }
 #aboutOffcanvas {
     text-align: center !important;
 
-    background: rgb(78, 71, 31) !important;
+    background: linear-gradient(98deg, rgb(185, 82, 34), rgb(143, 6, 6)) !important;
 }
 #customizationOffcanvas {
-    background: rgb(110, 67, 26) !important;
+    background: linear-gradient(198deg, rgb(59, 204, 16), rgb(55, 137, 214))  !important;
 }
 #toolsOffcanvas {
-    background: rgb(102, 95, 30) !important;
+    background: linear-gradient(124deg, rgb(148, 124, 15), rgb(30, 76, 102))  !important;
 }
 
 

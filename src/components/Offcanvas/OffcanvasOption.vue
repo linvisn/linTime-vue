@@ -6,9 +6,9 @@ defineProps({
 </script>
 
 <template>
-    <li class="offcanvasOption" :class="{ disabled: disabled }">
+    <div class="offcanvasOption" :class="{ disabled: disabled }">
         <slot />
-    </li>
+    </div>
 </template>
 
 <style scoped>
@@ -19,6 +19,7 @@ defineProps({
     font-size: calc(0.875rem + 0.875vh) !important;
     font-weight: 400;
 
+    border: 0.1em solid rgba(255, 255, 255, 0.25);
     border-radius: 0.5em;
 
     background-color: rgb(73, 0, 133);

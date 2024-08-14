@@ -101,11 +101,9 @@ const switchMPState = (event, id) => {
 <template>
 <div :class="enabledFont">
   <Offcanvas :id="'settingsOffcanvas'" :title="'Settings'" :icon="'bi-gear-fill'">
-    <ul>
-      <OffcanvasOption data-bs-toggle="offcanvas" href="#customizationOffcanvas" aria-controls="customizationOffcanvas"><i class="bi bi-palette-fill"></i> Personalization</OffcanvasOption>
-      <OffcanvasOption data-bs-toggle="offcanvas" href="#toolsOffcanvas" aria-controls="toolsOffcanvas"><i class="bi bi-tools"></i> Used Tools</OffcanvasOption>
-      <a href="https://github.com/linvisn/linTime/" target="_blank"><OffcanvasOption><i class="bi bi-github"></i> GitHub Repo</OffcanvasOption></a>
-    </ul>
+    <OffcanvasOption data-bs-toggle="offcanvas" href="#customizationOffcanvas" aria-controls="customizationOffcanvas"><i class="bi bi-palette-fill"></i> Personalization</OffcanvasOption>
+    <OffcanvasOption data-bs-toggle="offcanvas" href="#toolsOffcanvas" aria-controls="toolsOffcanvas"><i class="bi bi-tools"></i> Used Tools</OffcanvasOption>
+    <a href="https://github.com/linvisn/linTime/" target="_blank"><OffcanvasOption><i class="bi bi-github"></i> GitHub Repo</OffcanvasOption></a>
   </Offcanvas>
 
   <Offcanvas :id="'aboutOffcanvas'" :title="'About'" :icon="'bi-info-circle-fill'">
@@ -133,14 +131,12 @@ const switchMPState = (event, id) => {
   </Offcanvas>
   
   <Offcanvas :id="'toolsOffcanvas'" :title="'Tools'" :icon="'bi-tools'" :prevOffcanvas="'settingsOffcanvas'">
-    <ol>
-      <li><OffcanvasText><OffcanvasLink link="https://vuejs.org/">Vue.js 3</OffcanvasLink> <i class="devicon-vuejs-plain"></i></OffcanvasText></li>
-      <li><OffcanvasText><OffcanvasLink link="https://getbootstrap.com/">Bootstrap 5</OffcanvasLink> <i class="devicon-bootstrap-plain"></i></OffcanvasText></li>
-      <li><OffcanvasText><OffcanvasLink link="https://icons.getbootstrap.com/">Bootstrap Icons</OffcanvasLink> <i class="devicon-bootstrap-plain"></i></OffcanvasText></li>
-      <li><OffcanvasText><OffcanvasLink link="https://devicon.dev/">Devicon</OffcanvasLink> <i class="devicon-devicon-plain"></i></OffcanvasText></li>
-      <li><OffcanvasText><OffcanvasLink link="https://fonts.google.com/">Google Fonts</OffcanvasLink> <i class="devicon-google-plain"></i></OffcanvasText></li>
-      <li><OffcanvasText><OffcanvasLink link="https://www.npmjs.com/package/js-cookie">js-cookie</OffcanvasLink> <i class="bi bi-cookie"></i></OffcanvasText></li>
-    </ol>
+    <OffcanvasText><OffcanvasLink link="https://vuejs.org/">Vue.js 3</OffcanvasLink> <i class="devicon-vuejs-plain"></i></OffcanvasText>
+    <OffcanvasText><OffcanvasLink link="https://getbootstrap.com/">Bootstrap 5</OffcanvasLink> <i class="devicon-bootstrap-plain"></i></OffcanvasText>
+    <OffcanvasText><OffcanvasLink link="https://icons.getbootstrap.com/">Bootstrap Icons</OffcanvasLink> <i class="devicon-bootstrap-plain"></i></OffcanvasText>
+    <OffcanvasText><OffcanvasLink link="https://devicon.dev/">Devicon</OffcanvasLink> <i class="devicon-devicon-plain"></i></OffcanvasText>
+    <OffcanvasText><OffcanvasLink link="https://fonts.google.com/">Google Fonts</OffcanvasLink> <i class="devicon-google-plain"></i></OffcanvasText>
+    <OffcanvasText><OffcanvasLink link="https://www.npmjs.com/package/js-cookie">js-cookie</OffcanvasLink> <i class="bi bi-cookie"></i></OffcanvasText>
   </Offcanvas>
 
   
