@@ -109,7 +109,7 @@ const switchMPState = (event, id) => {
 <template>
 <div :class="enabledFont">
   <Offcanvas :id="'settingsOffcanvas'" :title="'Settings'" :icon="'bi-gear-fill'">
-    <OffcanvasOption data-bs-toggle="offcanvas" href="#customizationOffcanvas" aria-controls="customizationOffcanvas"><i class="bi bi-palette-fill"></i> Personalization</OffcanvasOption>
+    <OffcanvasOption data-bs-toggle="offcanvas" href="#customizationOffcanvas" aria-controls="customizationOffcanvas"><i class="bi bi-palette-fill"></i> Customization</OffcanvasOption>
     <OffcanvasOption data-bs-toggle="offcanvas" href="#toolsOffcanvas" aria-controls="toolsOffcanvas"><i class="bi bi-tools"></i> Used Tools</OffcanvasOption>
     <a href="https://github.com/linvisn/linTime/" target="_blank"><OffcanvasOption><i class="bi bi-github"></i> GitHub Repo</OffcanvasOption></a>
   </Offcanvas>
