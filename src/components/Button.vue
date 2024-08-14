@@ -20,4 +20,10 @@ button {
 button:hover {
     background-color: rgb(150, 49, 133);
 }
+.midnight-fireplace button {
+    background: rgb(175, 63, 19);
+}
+.midnight-fireplace button:hover {
+    background: rgb(201, 85, 40);
+}
 </style>

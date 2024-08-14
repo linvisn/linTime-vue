@@ -86,24 +86,24 @@ const playSound = () => {
 
     <div class="tabataInputs row">
         <span class="tabataInputItem col-lg-4 col-5">
-            <div class="tabataInputLabel">
-                seconds for work
+            <div>
+                <span class="tabataInputLabel">seconds for work </span>
                 <span class="resetValue d-block d-sm-inline" v-if="!isStarted" @click="secondsForWork = 0"><i class="bi bi-arrow-clockwise"></i></span>
             </div>
             <input class="tabataInput" :class="{ tabataInputActive: isStarted }" type="number" placeholder="Enter seconds for work" v-model="secondsForWork" min="0" @keyup.enter="startTabata()" :disabled="isStarted">
         </span>
 
         <span class="tabataInputItem col-lg-3 col-4">
-            <div class="tabataInputLabel">
-                seconds for rest 
+            <div>
+                <span class="tabataInputLabel">seconds for rest </span>
                 <span class="resetValue d-block d-sm-inline" v-if="!isStarted" @click="secondsForRest = 0"><i class="bi bi-arrow-clockwise"></i></span>
             </div>
             <input class="tabataInput" :class="{ tabataInputActive: isStarted }" type="number" placeholder="Enter seconds for rest" v-model="secondsForRest" min="0" @keyup.enter="startTabata()" :disabled="isStarted">
         </span>
 
         <span class="tabataInputItem col-lg-2 col-3">
-            <div class="tabataInputLabel">
-                rounds 
+            <div>
+                <span class="tabataInputLabel">rounds </span>
                 <span class="resetValue d-block d-sm-inline" v-if="!isStarted" @click="rounds = 0"><i class="bi bi-arrow-clockwise"></i></span>
             </div>
             <input class="tabataInput" :class="{ tabataInputActive: isStarted }" type="number" placeholder="Enter rounds" v-model="rounds" min="0" @keyup.enter="startTabata()" :disabled="isStarted">
@@ -163,9 +163,11 @@ const playSound = () => {
     padding: 0;
 }
 
-.tabataInputLabel {
+.tabataInputItem div {
     font-size: calc(0.625rem + 0.875vh);
+}
 
+.tabataInputLabel {
     opacity: 0.5;
 }
 
@@ -181,10 +183,16 @@ const playSound = () => {
 
     background-color: darkslategray;
 }
+.midnight-fireplace .tabataInput {
+    background-color: rgb(64, 47, 79);
+}
 .tabataInputActive {
     background-color: rgb(128, 123, 65);
 
     opacity: 0.75;
+}
+.midnight-fireplace .tabataInputActive {
+    background-color: rgb(77, 79, 47);
 }
 
 .resetValue {
@@ -192,9 +200,19 @@ const playSound = () => {
     padding: 0.25vmax 1vmax;
 
     background-color: rgb(41, 122, 95);
+    
+    opacity: 0.75;
 }
 .resetValue:hover {
     background-color: rgb(37, 163, 121);
+
+    opacity: 1;
+}
+.midnight-fireplace .resetValue {
+    background: rgb(165, 18, 18);
+}
+.midnight-fireplace .resetValue:hover {
+    background: rgb(204, 33, 33);
 }
 
 .label {

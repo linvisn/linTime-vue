@@ -16,6 +16,7 @@ import OffcanvasLink from "@/components/Offcanvas/OffcanvasLink.vue"
 const defaultPanel = ref('')
 const defaultFont = ref('')
 const settingsOptionsExpanded = ref('')
+const defaultTheme = ref('')
 
 const enabledFont = computed(() => ({
   'font-raleway': defaultFont.value === 'Raleway',
@@ -26,7 +27,9 @@ const enabledFont = computed(() => ({
   'font-source-code-pro': defaultFont.value === 'Source Code Pro',
   'font-geologica': defaultFont.value === 'Geologica'
 }))
-
+const chosenTheme = computed(() => ({
+  'midnight-fireplace': defaultTheme.value === 'Midnight Fireplace'
+}))
 
 window.addEventListener('beforeunload', (event) => {
   mainPanels.value.forEach(mainPanel => {
@@ -55,11 +58,16 @@ const fonts = ref([
   { family: 'Source Code Pro', class: 'font-source-code-pro'},
   { family: 'Geologica', class: 'font-geologica'}
 ])
+const themes = ref([
+  { title: 'Default' },
+  { title: 'Midnight Fireplace' }
+])
 
 const cookies = ref([
   { variable: defaultPanel, title: 'defaultPanel', defaultValue: mainPanels.value[0].title },
   { variable: defaultFont, title: 'defaultFont', defaultValue: fonts.value[0].family },
-  { variable: settingsOptionsExpanded, title: 'settingsOptionsExpanded', defaultValue: true }
+  { variable: settingsOptionsExpanded, title: 'settingsOptionsExpanded', defaultValue: true },
+  { variable: defaultTheme, title: 'defaultTheme', defaultValue: 'Default' }
 ])
 
 
@@ -128,6 +136,14 @@ const switchMPState = (event, id) => {
     <select v-else class="form-select" v-model="defaultFont">
       <option v-for="(font, index) in fonts" :key="index" :name="'defaultFont'" :class='font.class' :id="'defaultFont' + index" :value="font.family">{{ font.family }}</option>
     </select>
+    
+    <OffcanvasText>Choose default theme:</OffcanvasText>
+    <div v-if="settingsOptionsExpanded">
+      <Radio v-for="(theme, index) in themes" :key="index" :name="'theme'" :id="'theme' + index" v-model="defaultTheme" :value="theme.title" />
+    </div>
+    <select v-else class="form-select" v-model="defaultTheme">
+      <option v-for="(theme, index) in themes" :key="index" :name="'theme'" :id="'theme' + index" :value="theme.title">{{ theme.title }}</option>
+    </select>
   </Offcanvas>
   
   <Offcanvas :id="'toolsOffcanvas'" :title="'Tools'" :icon="'bi-tools'" :prevOffcanvas="'settingsOffcanvas'">
@@ -142,21 +158,18 @@ const switchMPState = (event, id) => {
   
   <div class="row">
     <div class="panel col-2">
-      <div class="side-panel">
-        <ul class="side-panel-menu">
-          <SidePanelOption v-for="(option, index) in mainPanels" :key="index" :title="option.title" :icon="option.icon" :active="option.active" :MP="option.MP" @switchMPState="switchMPState" />
-        </ul>
-      </div>
-
-      <div class="side-panel justify-content-end">
-        <ul class="side-panel-menu">
-          <SidePanelOption v-for="(option, index) in offcanvas" :key="index" :title="option.title" :icon="option.icon" data-bs-toggle="offcanvas" :href="'#' + option.href" :aria-controls="option.href" />
-        </ul>
-      </div>
+      <div class="side-panel" :class="chosenTheme">
+        <div>
+          <SidePanelOption v-for="(option, index) in mainPanels" :key="index" :title="option.title" :icon="option.icon" :active="option.active" :MP="option.MP" @switchMPState="switchMPState" :class="chosenTheme" />
+        </div>
+        <div>
+          <SidePanelOption v-for="(option, index) in offcanvas" :key="index" :title="option.title" :icon="option.icon" data-bs-toggle="offcanvas" :href="'#' + option.href" :aria-controls="option.href" :class="chosenTheme" />
+        </div>
     </div>
+  </div>
 
     <div class="panel col">
-      <MainPanel v-for="(mainPanel, index) in mainPanels" :key="index" :id="mainPanel.MP" :title="mainPanel.title" :active="mainPanel.active" v-model:isStarted="mainPanel.isStarted" />
+      <MainPanel v-for="(mainPanel, index) in mainPanels" :key="index" :id="mainPanel.MP" :title="mainPanel.title" :active="mainPanel.active" v-model:isStarted="mainPanel.isStarted" :class="chosenTheme" />
     </div>
   </div>
 </div>

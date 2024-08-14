@@ -71,7 +71,7 @@ const countTimeElapsed = (value, time) => {
 <template>
 <div class="stopwatch">
     <p class="stopwatchHeader">
-        {{ formatTime(ms) }} <i v-if="isPaused" class="bi bi-pause-btn-fill"></i> <span class="laps-amount d-flex d-sm-inline-flex" v-if="isStarted">{{ lapsAmount }}<span class="d-inline d-sm-none"> laps</span></span>
+        {{ formatTime(ms) }} <i v-if="isPaused" class="bi bi-pause-btn-fill"></i> <span class="lapsAmount d-flex d-sm-inline-flex" v-if="isStarted">{{ lapsAmount }}<span class="d-inline d-sm-none"> laps</span></span>
     </p>
 
     <Button v-if="!isStarted" @click="startStopwatch()"><i class="bi bi-caret-right-fill"></i> Start Stopwatch</Button>
@@ -105,7 +105,7 @@ const countTimeElapsed = (value, time) => {
     text-align: center;
 }
 
-.laps-amount {
+.lapsAmount {
     justify-content: center;
 
     padding: 0 calc(0.5rem + 0.5vh);
@@ -118,6 +118,9 @@ const countTimeElapsed = (value, time) => {
     background: rgb(123, 168, 185);
 
     white-space: pre-wrap;
+}
+.midnight-fireplace .lapsAmount {
+    background: rgb(192, 143, 52);
 }
 
 .stopwatchBtn {

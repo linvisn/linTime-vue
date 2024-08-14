@@ -37,9 +37,12 @@ const isStarted = defineModel('isStarted')
 .main-panel-active {
     z-index: 1;
 }
+.midnight-fireplace {
+  background: linear-gradient(64deg, rgb(14, 3, 116), rgb(105, 56, 0));
+}
 
 .MPHeader {
-    padding: 1vmax 3vmax;
+    padding: calc(0.5rem + 1.25vh) calc(0.75rem + 2.25vh);
 
     font-size: calc(1.5rem + 1vh);
     font-weight: 700;
@@ -49,5 +52,8 @@ const isStarted = defineModel('isStarted')
     background: linear-gradient(rgb(59, 59, 59), transparent);
 
     z-index: inherit;
+}
+.midnight-fireplace .MPHeader {
+  background: linear-gradient(rgb(97, 55, 0), transparent);
 }
 </style>

@@ -9,11 +9,9 @@ defineEmits(['switchMPState'])
 </script>
 
 <template>
-    <li class="sidePanelOption" :class="{ active: active }" @click="$emit('switchMPState', $event, MP)">
-        <div>
-            <i class="bi" :class="icon"></i><span class="title d-none d-lg-inline">{{ title }}</span>
-        </div>
-    </li>
+    <div class="sidePanelOption" :class="{ active: active }" @click="$emit('switchMPState', $event, MP)">
+        <i class="bi" :class="icon"></i><span class="title d-none d-lg-inline">{{ title }}</span>
+    </div>
 </template>
 
 <style scoped>
@@ -30,15 +28,25 @@ defineEmits(['switchMPState'])
 
     border-radius: 0.25em;
 
-    background-color: rgb(50, 73, 73);
+    background: rgb(50, 73, 73);
 
+    cursor: pointer;
     white-space: pre-wrap !important;
 }
 .sidePanelOption:hover {
     background-color: rgb(77, 95, 95);
 }
-.active {
+.sidePanelOption:is(.active) {
     background-color: rgb(79, 116, 116);
+}
+.midnight-fireplace {
+  background: rgb(98, 105, 0, 0.5);
+}
+.midnight-fireplace:hover {
+  background: rgb(98, 105, 0, 0.75);
+}
+.midnight-fireplace:is(.active) {
+  background: rgb(98, 105, 0, 0.875);
 }
 
 .title {

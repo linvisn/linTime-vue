@@ -62,24 +62,24 @@ const resetTimer = () => {
 
     <div class="timerInputs row">
         <span class="timerInputItem col-3">
-            <div class="timerInputLabel">
-                hours 
+            <div>
+                <span class="timerInputLabel">hours </span>
                 <span class="resetValue d-block d-sm-inline" v-if="!isStarted" @click="hours = 0"><i class="bi bi-arrow-clockwise"></i></span>
             </div>
             <input class="timerInput" :class="{ timerInputActive: isStarted }" type="number" placeholder="Enter hours" v-model="hours" min="0" @keyup.enter="startTimer()" :disabled="isStarted">
         </span>
 
         <span class="timerInputItem col-3">
-            <div class="timerInputLabel">
-                minutes 
+            <div>
+                <span class="timerInputLabel">minutes </span>
                 <span class="resetValue d-block d-sm-inline" v-if="!isStarted" @click="minutes = 0"><i class="bi bi-arrow-clockwise"></i></span>
             </div>
             <input class="timerInput" :class="{ timerInputActive: isStarted }" type="number" placeholder="Enter minutes" v-model="minutes" min="0" @keyup.enter="startTimer()" :disabled="isStarted">
         </span>
 
         <span class="timerInputItem col-3">
-            <div class="timerInputLabel">
-                seconds 
+            <div>
+                <span class="timerInputLabel">seconds </span>
                 <span class="resetValue d-block d-sm-inline" v-if="!isStarted" @click="seconds = 0"><i class="bi bi-arrow-clockwise"></i></span>
             </div>
             <input class="timerInput" :class="{ timerInputActive: isStarted }" type="number" placeholder="Enter seconds" v-model="seconds" min="0" @keyup.enter="startTimer()" :disabled="isStarted">
@@ -128,9 +128,11 @@ const resetTimer = () => {
     padding: 0;
 }
 
-.timerInputLabel {
+.timerInputItem div {
     font-size: calc(0.625rem + 0.875vh);
+}
 
+.timerInputLabel {
     opacity: 0.5;
 }
 
@@ -146,10 +148,16 @@ const resetTimer = () => {
 
     background-color: darkslategray;
 }
+.midnight-fireplace .timerInput {
+    background-color: rgb(64, 47, 79);
+}
 .timerInputActive {
     background-color: rgb(128, 123, 65);
 
     opacity: 0.75;
+}
+.midnight-fireplace .timerInputActive {
+    background-color: rgb(77, 79, 47);
 }
 
 .resetValue {
@@ -157,8 +165,18 @@ const resetTimer = () => {
     padding: 0.25vmax 1vmax;
 
     background-color: rgb(41, 122, 95);
+    
+    opacity: 0.75;
 }
 .resetValue:hover {
     background-color: rgb(37, 163, 121);
+
+    opacity: 1;
+}
+.midnight-fireplace .resetValue {
+    background: rgb(165, 18, 18);
+}
+.midnight-fireplace .resetValue:hover {
+    background: rgb(204, 33, 33);
 }
 </style>
