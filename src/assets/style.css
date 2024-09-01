@@ -1,3 +1,5 @@
+@import url('https://unpkg.com/@catppuccin/palette/css/catppuccin.css');
+
 * {
     color: white;
 
@@ -60,5 +62,8 @@ option {
     background-color: rgb(30, 48, 48) !important;
 }
 .side-panel:is(.midnight-fireplace) {
-  background: linear-gradient(90deg, rgb(105, 0, 70), rgb(14, 3, 116));
+    background: linear-gradient(90deg, rgb(60, 8, 95), rgb(14, 3, 116)) !important;
+}
+.side-panel:is(.mocha) {
+    background-color: rgb(var(--ctp-mocha-crust-rgb)) !important;
 }

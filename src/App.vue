@@ -28,7 +28,8 @@ const enabledFont = computed(() => ({
   'font-geologica': defaultFont.value === 'Geologica'
 }))
 const chosenTheme = computed(() => ({
-  'midnight-fireplace': defaultTheme.value === 'Midnight Fireplace'
+  'midnight-fireplace': defaultTheme.value === 'Midnight Fireplace',
+  'mocha': defaultTheme.value === 'Mocha'
 }))
 
 window.addEventListener('beforeunload', (event) => {
@@ -60,7 +61,8 @@ const fonts = ref([
 ])
 const themes = ref([
   { title: 'Default' },
-  { title: 'Midnight Fireplace' }
+  { title: 'Midnight Fireplace' },
+  { title: 'Mocha' }
 ])
 
 const cookies = ref([
@@ -153,6 +155,7 @@ const switchMPState = (event, id) => {
     <OffcanvasText><OffcanvasLink link="https://devicon.dev/">Devicon</OffcanvasLink> <i class="devicon-devicon-plain"></i></OffcanvasText>
     <OffcanvasText><OffcanvasLink link="https://fonts.google.com/">Google Fonts</OffcanvasLink> <i class="devicon-google-plain"></i></OffcanvasText>
     <OffcanvasText><OffcanvasLink link="https://www.npmjs.com/package/js-cookie">js-cookie</OffcanvasLink> <i class="bi bi-cookie"></i></OffcanvasText>
+    <OffcanvasText><OffcanvasLink link="https://github.com/catppuccin/palette">Catppuccin Palettes</OffcanvasLink> <i class="bi bi-cookie"></i></OffcanvasText>
   </Offcanvas>
 
   

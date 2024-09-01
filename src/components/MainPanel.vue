@@ -40,6 +40,9 @@ const isStarted = defineModel('isStarted')
 .midnight-fireplace {
   background: linear-gradient(64deg, rgb(14, 3, 116), rgb(105, 56, 0));
 }
+.mocha {
+    background-color: rgb(var(--ctp-mocha-mantle-rgb)) !important;
+}
 
 .MPHeader {
     padding: calc(0.5rem + 1.25vh) calc(0.75rem + 2.25vh);
@@ -54,6 +57,9 @@ const isStarted = defineModel('isStarted')
     z-index: inherit;
 }
 .midnight-fireplace .MPHeader {
-  background: linear-gradient(rgb(97, 55, 0), transparent);
+    background: linear-gradient(rgb(97, 55, 0), transparent);
+}
+.mocha .MPHeader {
+    background: linear-gradient(rgb(var(--ctp-mocha-base-rgb)), transparent) !important;
 }
 </style>

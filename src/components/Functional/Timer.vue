@@ -66,7 +66,7 @@ const resetTimer = () => {
                 <span class="timerInputLabel">hours </span>
                 <span class="resetValue d-block d-sm-inline" v-if="!isStarted" @click="hours = 0"><i class="bi bi-arrow-clockwise"></i></span>
             </div>
-            <input class="timerInput" :class="{ timerInputActive: isStarted }" type="number" placeholder="Enter hours" v-model="hours" min="0" @keyup.enter="startTimer()" :disabled="isStarted">
+            <input class="timerInput first" :class="{ timerInputActive: isStarted }" type="number" placeholder="Enter hours" v-model="hours" min="0" @keyup.enter="startTimer()" :disabled="isStarted">
         </span>
 
         <span class="timerInputItem col-3">
@@ -74,7 +74,7 @@ const resetTimer = () => {
                 <span class="timerInputLabel">minutes </span>
                 <span class="resetValue d-block d-sm-inline" v-if="!isStarted" @click="minutes = 0"><i class="bi bi-arrow-clockwise"></i></span>
             </div>
-            <input class="timerInput" :class="{ timerInputActive: isStarted }" type="number" placeholder="Enter minutes" v-model="minutes" min="0" @keyup.enter="startTimer()" :disabled="isStarted">
+            <input class="timerInput second" :class="{ timerInputActive: isStarted }" type="number" placeholder="Enter minutes" v-model="minutes" min="0" @keyup.enter="startTimer()" :disabled="isStarted">
         </span>
 
         <span class="timerInputItem col-3">
@@ -82,7 +82,7 @@ const resetTimer = () => {
                 <span class="timerInputLabel">seconds </span>
                 <span class="resetValue d-block d-sm-inline" v-if="!isStarted" @click="seconds = 0"><i class="bi bi-arrow-clockwise"></i></span>
             </div>
-            <input class="timerInput" :class="{ timerInputActive: isStarted }" type="number" placeholder="Enter seconds" v-model="seconds" min="0" @keyup.enter="startTimer()" :disabled="isStarted">
+            <input class="timerInput third" :class="{ timerInputActive: isStarted }" type="number" placeholder="Enter seconds" v-model="seconds" min="0" @keyup.enter="startTimer()" :disabled="isStarted">
         </span>
     </div>
 
@@ -136,6 +136,7 @@ const resetTimer = () => {
     opacity: 0.5;
 }
 
+
 .timerInput {
     display: block;
 
@@ -143,14 +144,33 @@ const resetTimer = () => {
     height: calc(1.5rem + 2vh);
     padding: 0.25vmax 1vmax;
 
-    border: 0.1vmax solid rgba(255, 255, 255, 0.5);
+    border: 0.1em solid rgba(255, 255, 255, 0.5);
     outline: none;
 
     background-color: darkslategray;
 }
+.timerInput:is(.second) {
+    border-right: none;
+    border-left: none;
+}
+
 .midnight-fireplace .timerInput {
     background-color: rgb(64, 47, 79);
 }
+.mocha .timerInput {
+    border-color: rgb(var(--ctp-mocha-lavender-rgb));
+
+    background-color: rgb(var(--ctp-mocha-overlay0-rgb));
+}
+.mocha .timerInput:is(.first) {
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
+.mocha .timerInput:is(.third) {
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+
 .timerInputActive {
     background-color: rgb(128, 123, 65);
 
@@ -159,6 +179,10 @@ const resetTimer = () => {
 .midnight-fireplace .timerInputActive {
     background-color: rgb(77, 79, 47);
 }
+.mocha .timerInputActive {
+    border-color: rgb(var(--ctp-mocha-yellow-rgb));
+}
+
 
 .resetValue {
     margin: 0.5vmax 0.25vmax 1.25vmax;
@@ -173,10 +197,18 @@ const resetTimer = () => {
 
     opacity: 1;
 }
+
 .midnight-fireplace .resetValue {
-    background: rgb(165, 18, 18);
+    background-color: rgb(165, 18, 18);
 }
 .midnight-fireplace .resetValue:hover {
-    background: rgb(204, 33, 33);
+    background-color: rgb(204, 33, 33);
+}
+
+.mocha .resetValue {
+    background-color: rgb(var(--ctp-mocha-sky-rgb));
+}
+.mocha .resetValue:hover {
+    background-color: rgb(var(--ctp-mocha-blue-rgb));
 }
 </style>

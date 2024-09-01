@@ -115,12 +115,15 @@ const countTimeElapsed = (value, time) => {
 
     border-radius: 0.25em;
 
-    background: rgb(123, 168, 185);
+    background-color: rgb(123, 168, 185);
 
     white-space: pre-wrap;
 }
 .midnight-fireplace .lapsAmount {
-    background: rgb(192, 143, 52);
+    background-color: rgb(192, 143, 52);
+}
+.mocha .lapsAmount {
+    background-color: rgb(var(--ctp-mocha-blue-rgb));
 }
 
 .stopwatchBtn {

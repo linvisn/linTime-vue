@@ -20,10 +20,18 @@ button {
 button:hover {
     background-color: rgb(150, 49, 133);
 }
+
 .midnight-fireplace button {
-    background: rgb(175, 63, 19);
+    background-color: rgb(175, 63, 19);
 }
 .midnight-fireplace button:hover {
-    background: rgb(201, 85, 40);
+    background-color: rgb(201, 85, 40);
+}
+
+.mocha button {
+    background-color: rgb(var(--ctp-mocha-surface1-rgb));
+}
+.mocha button:hover {
+    background-color: rgb(var(--ctp-mocha-surface2-rgb));
 }
 </style>

@@ -39,15 +39,27 @@ defineEmits(['switchMPState'])
 .sidePanelOption:is(.active) {
     background-color: rgb(79, 116, 116);
 }
+
 .midnight-fireplace {
-  background: rgb(98, 105, 0, 0.5);
+  background-color: rgb(98, 105, 0, 0.5);
 }
 .midnight-fireplace:hover {
-  background: rgb(98, 105, 0, 0.75);
+  background-color: rgb(98, 105, 0, 0.75);
 }
 .midnight-fireplace:is(.active) {
-  background: rgb(98, 105, 0, 0.875);
+  background-color: rgb(98, 105, 0, 0.875);
 }
+
+.mocha {
+    background-color: rgb(var(--ctp-mocha-surface0-rgb));
+}
+.mocha:hover {
+    background-color: rgb(var(--ctp-mocha-surface1-rgb));
+}
+.mocha:is(.active) {
+    background-color: rgb(var(--ctp-mocha-surface2-rgb));
+}
+
 
 .title {
     margin-left: 0.25em;
